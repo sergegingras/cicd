@@ -19,8 +19,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - run: |
-      git fetch --all --unshallow
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
@@ -45,5 +43,6 @@ jobs:
         HEROKU_API_TOKEN: ${{ secrets.HEROKU }}
         HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME}}
       run: |
+        git fetch --all --unshallow
         git remote add heroku https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git
         git push heroku main:refs/heads/main
